@@ -1,0 +1,21 @@
+{
+    "manifest_version": 3,
+    "name": "DuckTabs",
+    "description": "Efficiently manage your tab groups with the friendly help of DuckTabs!",
+    "version": "1.0",
+    "permissions": [
+      "tabs",
+      "storage",
+      "downloads"
+    ],
+    "background": {
+      "service_worker": "./src/serviceworker/background.js"
+    },
+    "action": {
+      "default_popup": "./src/popup.html",
+      "default_icon": {
+        "16": "./assets/icon16.png"
+      }
+    }
+  }
+  
