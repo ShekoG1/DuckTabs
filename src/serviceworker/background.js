@@ -30,7 +30,7 @@ async function saveGroup(groupName) {
   } else {
     groups.push({ name: groupName, tabs: urls });
   }
-  await chrome.storage.local.set({ groups });
+  return await chrome.storage.local.set({ groups });
 }
 
 async function openGroup(groupName) {
@@ -54,14 +54,7 @@ async function openGroup(groupName) {
         .map(tab => tab.id);
   
       await chrome.tabs.remove(tabIdsToRemove);
-    });  
-
-    /*
-    // Get current window information and remove non-pinned tabs
-    const currentWindow = await chrome.windows.getCurrent({ populate: true });
-    const nonPinnedTabs = currentWindow.tabs.filter(tab => !tab.pinned);
-    const tabIdsToRemove = nonPinnedTabs.map(tab => tab.id);
-    await chrome.tabs.remove(tabIdsToRemove);*/
+    });
   }
 }
 

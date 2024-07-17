@@ -1,38 +1,36 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      width: 200px;
-      padding: 10px;
-    }
-    input, button {
-      width: 100%;
-      margin-bottom: 10px;
-    }
-    ul {
-      list-style-type: none;
-      padding: 0;
-    }
-    li {
-      margin-bottom: 5px;
-    }
-    li button {
-      width: auto;
-      margin-left: 5px;
-    }
-  </style>
+  <link rel="stylesheet" href="./style.css" />
 </head>
 <body>
-  <h3>DuckTabs</h3>
-  <input type="text" id="groupName" placeholder="Enter group name" />
-  <button id="saveGroup">Save Group</button>
-  <button id="exportGroups">Export Groups</button>
-  <input type="file" id="importGroupsFile" style="display: none;" />
-  <button id="importGroups">Import Groups</button>
-  <ul id="groupList"></ul>
+  <div id="root">
+    <h3 id="title">DuckTabs</h3>
+    <div id="form">
+      <div id="saveGroupOption">
+        <button id="saveGroupOption">
+          New Group
+        </button>
+      </div>
+      <div id="saveGroupInput">
+        <input type="text" id="groupName" placeholder="Enter group name" />
+        <button id="saveGroup">Save Group</button>
+      </div>
+    </div>
+    <div id="groupList_container">
+      <span>Groups</span>
+      <div id="groupList">
+        <!-- LIST GOES HERE -->
+      </div>
+    </div>
+    <button id="exportGroups">Export Groups</button>
+    <input type="file" id="importGroupsFile" style="display: none;" />
+    <button id="importGroups">Import Groups</button>
 
-  <script src="./scripts/popup.js"></script>
+    <script src="./scripts/popup.js"></script>
+  </div>
+  <footer>
+    Made with <span>The Duckinator</span> by <a href="https://theshekharmaharaj.com">Shekhar Maharaj</a>
+  </footer>
 </body>
 </html>
