@@ -5,20 +5,23 @@
 </head>
 <body>
   <div id="root">
-    <h3 id="title">DuckTabs</h3>
+    <h3 id="title">
+      <img src="./../assets/favicon.ico" alt="">
+      DuckTabs
+    </h3>
     <div id="form">
       <div id="saveGroupOption">
-        <button id="saveGroupOption">
-          New Group
+        <button id="saveGroupOption--btn">
+          Create New Group
         </button>
       </div>
       <div id="saveGroupInput">
         <input type="text" id="groupName" placeholder="Enter group name" />
-        <button id="saveGroup">Save Group</button>
+        <button id="saveGroup--cancel">Cancel</button><button id="saveGroup">Save Group</button>
       </div>
     </div>
     <div id="groupList_container">
-      <span>Groups</span>
+      <span id="groupList--title" class="error">Groups</span>
       <div id="groupList">
         <!-- LIST GOES HERE -->
       </div>
@@ -29,6 +32,9 @@
 
     <script src="./scripts/popup.js"></script>
   </div>
+  <marquee direction="right">
+    <img src="./../assets/DudeDuck.png" width="45" alt="Dude Duck - The Duke of Ducktown" srcset="">
+  </marquee>
   <footer>
     Made with <span>The Duckinator</span> by <a href="https://theshekharmaharaj.com">Shekhar Maharaj</a>
   </footer>

@@ -14,33 +14,152 @@ input, button {
   width: 100%;
   margin-bottom: 10px;
 }
+marquee{
+  height: 45px;
+}
+#title{
+  font-size: 25px;
+  width: 100%;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: fit-content;
+  padding: 5px;
+  background-color: rgb(87, 133, 176);
+  color: rgb(33, 50, 66);
+  box-sizing: border-box;
+  border-bottom: 2px solid rgb(33, 50, 66);
+}
+
+/* FORM */
+#saveGroupOption{
+  width: 100%;
+}
+#saveGroupOption--btn{
+  width: 100%;
+  padding: 5px;
+  text-align: center;
+  background-color: rgb(87, 133, 176);
+  border:none;
+  border-left: 2px solid rgb(33, 50, 66);
+  cursor: pointer;
+}
+#saveGroupOption--btn:hover{
+  background-color: rgb(105, 142, 176);
+  font-weight: 500;
+}
+
+#saveGroupInput{
+  display: none;
+  flex-direction: column;
+  gap: 2px;
+}
+#groupName, #groupName:focus{
+  padding: 10px;
+  background-color: rgb(87, 133, 176);
+  color: rgb(33, 50, 66);
+  border: 2px solid rgb(33, 50, 66);
+  outline: none;
+}
+#groupName::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+  color: rgb(33, 50, 66);
+}
+#saveGroupInput>button{
+  width: 50%;
+}
+#saveGroup--cancel{
+  background-color: #fc8d8d;
+  color: rgb(77, 0, 0);
+  border: 2px solid transparent;
+  font-weight: 500;
+  cursor: pointer;
+}
+#saveGroup--cancel:hover{
+  border-left-color: rgb(77, 0, 0);
+  border-bottom-color: rgb(77, 0, 0);
+}
+#saveGroup{
+  background-color: rgb(87, 133, 176);
+  border:2px solid transparent;
+  color:  rgb(33, 50, 66);
+  font-weight: 500;
+  cursor: pointer;
+}
+#saveGroup:hover{
+  border-right-color: rgb(33, 50, 66);
+  border-bottom-color: rgb(33, 50, 66);
+}
+#saveGroupInput>#groupName{
+  margin: 0;
+  box-sizing: border-box;
+}
+
+/* GROUP LIST */
 #groupList_container{
     display: flex;
     flex-direction: column;
-    gap: 5px;
+}
+#groupList_container>span{
+  width: fit-content;
+  background-color: rgb(241, 218, 112);
+  color: rgb(112, 96, 25);
+  padding: 5px 10px 2px 10px;
+  font-weight: bold;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+}
+#groupList_container>span.error{
+  background-color: #fc8d8d;
+  color: rgb(77, 0, 0);
 }
 #groupList {
   padding: 0;
   display: flex;
   flex-direction: column;
   margin-bottom: 5px;
+  background-color: rgb(241, 218, 112);
+  text-overflow: ellipsis;
+  max-height: 500px;
+  overflow: auto;
 }
-#groupList button {
-  width: auto;
-  margin-left: 5px;
+.group-item button {
+  width: 50px;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
-
-#title{
-    font-size: 30px;
-    width: 100%;
-    text-align: center;
+.group-item{
+  color: rgb(112, 96, 25);
+  border-bottom: 2px solid rgb(112, 96, 25);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px 10px 5px 5px;
+  height: 30px;
+}
+.open{
+  background-color: transparent;
+  border: none;
+  border-bottom: 2px solid rgb(112, 96, 25);
+  color: rgb(112, 96, 25);
+  font-weight: 500;
+}
+.open:hover{
+  font-weight: bold;
 }
 
 /* IMPORT / EXPORT BUTTONS */
 #exportGroups, #importGroups{
     background-color: rgb(241, 218, 112);
     color: rgb(112, 96, 25);
-    border: 2px solid rgb(236, 203, 52);
+    border: none;
+    margin: 0;
+}
+#exportGroups{
+  border-bottom: 2px solid rgb(236, 203, 52);
 }
 
 /* ERROR */
@@ -50,7 +169,7 @@ input, button {
     padding: 10px;
 }
 #errorTitle{
-    font-size: 20px;
+    font-size: 18px;
     font-weight: bold;
 }
 #refreshList--btn{
