@@ -9,6 +9,7 @@ Efficiently manage your tab groups like a pro with DuckTabs! Save, switch, and r
 
 - Save a group of open tabs.
 - Restore a saved group of tabs.
+- Remove groups at will.
 - Switch between different groups of tabs.
 - Export and import tab groups.
 - Excludes pinned tabs from being saved or closed.
@@ -86,3 +87,12 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - Enable Developer mode.
 - Load the unpacked extension.
 - Reload the extension after making changes.
+
+```
+
+**Thankyou for viewing. Have a lovely day ahead!**
+
+## 🔗 Links
+[![portfolio](https://img.shields.io/badge/my_portfolio-000?style=for-the-badge&logo=ko-fi&logoColor=white)](https://www.theshekharmaharaj.com)
+[![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/the-shekhar-maharaj/)
+[![twitter](https://img.shields.io/badge/twitter-1DA1F2?style=for-the-badge&logo=twitter&logoColor=white)](https://twitter.com/therealsheko)
