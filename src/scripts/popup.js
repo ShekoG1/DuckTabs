@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const saveGroupInput = document.querySelector('#saveGroupInput');
   const groupList__title = document.querySelector('#groupList--title');
   const saveGroup__cancel = document.querySelector('#saveGroup--cancel');
+  const deleteGroup = document.querySelector('.deleteGroup');
 
   saveGroupOption__btn.addEventListener('click', () => {
     showForm();
@@ -26,8 +27,20 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   exportGroupsButton.addEventListener('click', () => {
-    chrome.runtime.sendMessage({ type: 'exportGroups' });
+    chrome.runtime.sendMessage({ type: 'getGroups' }, (groups) => {
+      if (groups) {
+        const blob = new Blob([JSON.stringify(groups)], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+        chrome.downloads.download({
+          url: url,
+          filename: 'ducktabs_groups.json'
+        });
+      } else {
+        console.error("Failed to retrieve groups for export.");
+      }
+    });
   });
+  
 
   importGroupsButton.addEventListener('click', () => {
     importGroupsFile.click();
@@ -50,8 +63,11 @@ document.addEventListener('DOMContentLoaded', () => {
       if (e.target.classList.contains('open')) {
         chrome.runtime.sendMessage({ type: 'openGroup', groupName });
       }
+    }else if (e.target.classList.contains('deleteGroup')) {
+      removeGroup(e.target.dataset.group);
     }
   });
+
   saveGroup__cancel.addEventListener('click', () => {
     hideForm();
   });
@@ -64,7 +80,11 @@ document.addEventListener('DOMContentLoaded', () => {
     saveGroupOption.style.display = 'flex';
     saveGroupInput.style.display = 'none';
   }
-
+  async function removeGroup(groupName) {
+    await chrome.runtime.sendMessage({ type: 'removeGroup', groupName });
+    loadGroups();
+    console.log(`Remove group '${groupName}' message sent.`);
+  }
   function loadGroups() {
     chrome.runtime.sendMessage({ type: 'getGroups' }, (groups) => {
       groupList.innerHTML = '';
@@ -101,7 +121,13 @@ document.addEventListener('DOMContentLoaded', () => {
       groups.forEach((group,index) => {
         const div = document.createElement('div');
         div.classList.add('group-item');
-        div.textContent = group.name;
+        div.innerHTML = `
+        <div class='group-item_start'>
+          <svg class='deleteGroup' data-group='${group.name}' title='Delete this group' xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="red" class="bi bi-trash3-fill" viewBox="0 0 16 16">
+            <path d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5m-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5M4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06m6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528M8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5"/>
+          </svg>
+          <span class='group-item--close'></span><span>${group.name}</span>
+        </div>`;
         const openButton = document.createElement('button');
         openButton.innerHTML = `Open 
         <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" class="bi bi-box-arrow-up-right" viewBox="0 0 16 16">

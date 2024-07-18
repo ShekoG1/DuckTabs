@@ -16,6 +16,8 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     exportGroups();
   } else if (message.type === 'importGroups') {
     importGroups(message.fileContent);
+  } else if (message.type === 'removeGroup') {
+    removeGroup(message.groupName); // Load groups after removing - done on popup.js
   }
 });
 
@@ -58,20 +60,37 @@ async function openGroup(groupName) {
   }
 }
 
-function exportGroups() {
-  chrome.storage.local.get('groups', (data) => {
-    const blob = new Blob([JSON.stringify(data.groups)], { type: 'application/json' });
-    const url = URL.createObjectURL(blob);
-    chrome.downloads.download({
-      url: url,
-      filename: 'ducktabs_groups.json'
-    });
+async function exportGroups() {
+  const data = await chrome.storage.local.get('groups')
+    
+  const blob = new Blob([JSON.stringify(data.groups)], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  chrome.downloads.download({
+    url: url,
+    filename: 'ducktabs_groups.json'
   });
 }
 
-function importGroups(fileContent) {
-  const groups = JSON.parse(fileContent);
-  chrome.storage.local.set({ groups }, () => {
-    console.log('Tab groups imported successfully.');
-  });
+async function importGroups(fileContent) {
+  const importedGroups = JSON.parse(fileContent);
+
+  // Retrieve existing groups
+  const data = await chrome.storage.local.get('groups');
+  const existingGroups = data.groups || [];
+
+  // Merge the existing groups with the imported groups
+  const mergedGroups = existingGroups.concat(importedGroups);
+
+  // Save the merged groups back to storage
+  await chrome.storage.local.set({ groups: mergedGroups });
+
+  console.log('Tab groups imported and appended successfully.');
+}
+
+async function removeGroup(groupName) {
+  const data = await chrome.storage.local.get('groups');
+  const groups = data.groups || [];
+  const updatedGroups = groups.filter(group => group.name !== groupName);
+  await chrome.storage.local.set({ groups: updatedGroups });
+  console.log(`Group '${groupName}' removed successfully.`);
 }

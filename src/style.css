@@ -94,6 +94,13 @@ marquee{
   margin: 0;
   box-sizing: border-box;
 }
+.group-item_start{
+  display: flex;
+  gap: 5px;
+}
+.group-item_start svg{
+  cursor: pointer;
+}
 
 /* GROUP LIST */
 #groupList_container{
@@ -133,6 +140,7 @@ marquee{
 }
 .group-item{
   color: rgb(112, 96, 25);
+  border-left: 2px solid transparent;
   border-bottom: 2px solid rgb(112, 96, 25);
   display: flex;
   justify-content: space-between;
@@ -140,12 +148,16 @@ marquee{
   padding: 5px 10px 5px 5px;
   height: 30px;
 }
+.group-item:hover{
+  border-left-color: rgb(112, 96, 25);
+}
 .open{
   background-color: transparent;
   border: none;
   border-bottom: 2px solid rgb(112, 96, 25);
   color: rgb(112, 96, 25);
   font-weight: 500;
+  cursor: pointer;
 }
 .open:hover{
   font-weight: bold;
