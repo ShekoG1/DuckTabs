@@ -1,6 +1,3 @@
-### README.md
-
-
 # DuckTabs
 
 Efficiently manage your tab groups like a pro with DuckTabs! Save, switch, and restore groups of tabs effortlessly to streamline your browsing experience.
